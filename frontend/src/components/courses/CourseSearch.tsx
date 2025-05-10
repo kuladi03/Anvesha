@@ -7,7 +7,7 @@ interface CourseSearchProps {
   onFilterChange: (value: string) => void;
 }
 
-export const CourseSearch = ({ onSearch, onFilterChange }: CourseSearchProps) => {
+export const CourseSearch = ({ onSearch }: CourseSearchProps) => {
   return (
     <div className="flex gap-4 items-center mb-6">
       <div className="relative flex-1">

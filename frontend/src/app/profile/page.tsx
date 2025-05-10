@@ -108,6 +108,7 @@ export default function ProfilePage() {
         });
       } catch (error) {
         setError('Failed to load profile data.');
+        console.error('Error fetching profile:', error);
       } finally {
         setLoadingAuth(false);
       }
