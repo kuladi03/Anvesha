@@ -1,0 +1,65 @@
+/backend/node_modules
+/frontend/node_modules
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.pkl
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Environment variables
+.env
+*.env.local
+
+# Python virtual environment
+venv/
+env/
+ENV/
+
+# Node modules
+**/node_modules/
+**/.next/
+**/dist/
+**/build/
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+
+# Python IDE configs
+.idea/
+
+# Flask cache
+instance/
+*.pyc
+
+# Reports and model artifacts
+*.pkl
+*.joblib
+*.h5
+
+# Datasets or output data
+datasets/
+report_assets/
+
+# Coverage reports
+htmlcov/
+coverage.xml
+.cache/
+
+# npm & yarn lock files (optional — keep only one if needed)
+# package-lock.json
+# yarn.lock
+
+# Misc
+*.swp
+*.swo
