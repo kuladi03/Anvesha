@@ -31,8 +31,8 @@ else:
 client = MongoClient(os.getenv("MongoURI"))
 db = client["anvesha"]
 
-model = joblib.load(r"backend/models/dropout_risk_model.pkl")
-label_encoders = joblib.load(r"backend/models/label_encoders.pkl")
+model = joblib.load(r"models/dropout_risk_model.pkl")
+label_encoders = joblib.load(r"models/label_encoders.pkl")
 
 @app.route("/report/<report_id>")
 def view_report(report_id):
