@@ -267,19 +267,19 @@ export default function ProfilePage() {
                 <h4 className="font-semibold text-gray-700 border-b pb-2">Family Background</h4>
                 <div className="space-y-4">
                   <div>
-                    <p className="text-sm text-gray-500">Mother`&apos;`s Education</p>
+                    <p className="text-sm text-gray-500">Mother&apos;s Education</p>
                     <p className="font-medium text-gray-800">{form.motherQualification || '-'}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Father`&apos;`s Education</p>
+                    <p className="text-sm text-gray-500">Father&apos;s Education</p>
                     <p className="font-medium text-gray-800">{form.fatherQualification || '-'}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Mother`&apos;`s Occupation</p>
+                    <p className="text-sm text-gray-500">Mother&apos;s Occupation</p>
                     <p className="font-medium text-gray-800">{form.motherOccupation || '-'}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Father`&apos;`s Occupation</p>
+                    <p className="text-sm text-gray-500">Father&apos;s Occupation</p>
                     <p className="font-medium text-gray-800">{form.fatherOccupation || '-'}</p>
                   </div>
                 </div>
