@@ -3,7 +3,7 @@ from datetime import datetime
 
 def save_html_report_to_mongo(report_html, dataset_name: str, metadata=None):
     client = MongoClient("mongodb://localhost:27017/")
-    db = client["edudrop"]
+    db = client["anvesha"]
     collection = db["reports"]
 
     report_doc = {

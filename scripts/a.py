@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import json
 
 # Step 1: Load Excel
-df = pd.read_excel(r"D:\Projects\New folder\edudrop\datasets\Final Course List (Jan - Apr 2025).xlsx")
+df = pd.read_excel(r"D:\Projects\New folder\anvesha\datasets\Final Course List (Jan - Apr 2025).xlsx")
 
 # Step 2: Clean column names
 df.columns = df.columns.str.strip()  # remove leading/trailing whitespaces
@@ -44,7 +44,7 @@ courses = df.to_dict(orient="records")
 
 # Step 7: Upload to MongoDB
 client = MongoClient("mongodb://localhost:27017/")
-db = client["edudrop"]
+db = client["anvesha"]
 db.courses.delete_many({})  # Optional: clear previous courses
 db.courses.insert_many(courses)
 

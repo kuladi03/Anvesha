@@ -20,10 +20,10 @@ CORS(app, origins=["http://localhost:3000"], methods=["GET", "POST", "PUT", "OPT
 
 
 client = MongoClient("mongodb://localhost:27017/")
-db = client["edudrop"]
+db = client["anvesha"]
 
-model = joblib.load(r"backend\models\dropout_risk_model.pkls")
-label_encoders = joblib.load(r"\backend\models\label_encoders.pkl")
+model = joblib.load(r"backend\models\dropout_risk_model.pkl")
+label_encoders = joblib.load(r"backend\models\label_encoders.pkl")
 
 @app.route("/report/<report_id>")
 def view_report(report_id):

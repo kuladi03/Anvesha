@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 
 client = MongoClient("mongodb://localhost:27017/")
-db = client["edudrop"]
+db = client["anvesha"]
 
 def create_students_collection():
     db.create_collection("students", validator={

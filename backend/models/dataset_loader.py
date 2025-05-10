@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 def load_dataset(dataset_name):
     client = MongoClient("mongodb://localhost:27017/")  # use your connection string
-    db = client["edudrop"]  # your DB name from Compass
+    db = client["anvesha"]  # your DB name from Compass
 
     # Check if collection exists
     if dataset_name not in db.list_collection_names():

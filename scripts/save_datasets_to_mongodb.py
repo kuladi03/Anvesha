@@ -4,10 +4,10 @@ import os
 
 # Connect to MongoDB
 client = MongoClient("mongodb://localhost:27017/")
-db = client['edudrop']
+db = client['anvesha']
 
 # Path to the folder containing all your CSVs
-dataset_folder = r"D:\Projects\New folder\edudrop\datasets"
+dataset_folder = r"D:\Projects\New folder\anvesha\datasets"
 
 # Loop through each CSV and insert into MongoDB
 for filename in os.listdir(dataset_folder):

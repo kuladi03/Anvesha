@@ -8,7 +8,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 import joblib
 
 # Load the dataset
-df = pd.read_csv(r'D:\Projects\New folder\edudrop\datasets\india.csv')
+df = pd.read_csv(r'D:\Projects\New folder\anvesha\datasets\india.csv')
 
 # Feature engineering/mapping
 df['gender'] = df['Gender'].map({1: 'Male', 0: 'Female'})
