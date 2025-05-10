@@ -5,7 +5,7 @@ __pycache__/
 *.py[cod]
 *.so
 *.pyd
-*.pkl
+
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
@@ -43,7 +43,7 @@ instance/
 *.pyc
 
 # Reports and model artifacts
-*.pkl
+
 *.joblib
 *.h5
 
