@@ -1,9 +1,15 @@
 import pandas as pd
 from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def load_dataset(dataset_name):
-    client = MongoClient("mongodb://localhost:27017/")  # use your connection string
-    db = client["anvesha"]  # your DB name from Compass
+    client = MongoClient(os.getenv("MongoURI"))
+    db = client["anvesha"]
+
 
     # Check if collection exists
     if dataset_name not in db.list_collection_names():

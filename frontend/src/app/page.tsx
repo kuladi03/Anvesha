@@ -1,9 +1,7 @@
 'use client';
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, GraduationCap, BarChart2, Lightbulb, Users } from "lucide-react";
 import Link from "next/link";
-import Anvesha from "../../public/Anvesha.png"
 
 export default function LandingPage() {
   return (
@@ -11,7 +9,7 @@ export default function LandingPage() {
       {/* Header */}
       <header className="px-6 h-16 flex items-center justify-between shadow-md bg-white">
         <div className="flex items-center space-x-2">
-          <img src={Anvesha.src} alt="Anvesha Logo" className="h-10" />
+          <img src="/Anvesha.png" alt="Anvesha Logo" className="h-10" />
         </div>
         <nav className="flex items-center space-x-6 ml-auto">
           <Link className="text-sm font-medium text-[#6E59A5] hover:underline" href="#about">About</Link>

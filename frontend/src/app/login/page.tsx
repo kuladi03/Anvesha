@@ -25,14 +25,14 @@ export default function LoginPage() {
   
     try {
         if (isRegistering) {
-          const res = await axios.post<{ studentId: string }>('http://localhost:5000/api/register', {
+          const res = await axios.post<{ studentId: string }>(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/register`, {
             name,
             email,
             password,
           });
           localStorage.setItem('studentId', res.data.studentId); // ✅ Safe here
         } else {
-          const res = await axios.post<{ studentId: string }>('http://localhost:5000/api/login', {
+          const res = await axios.post<{ studentId: string }>(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, {
             email,
             password,
           });

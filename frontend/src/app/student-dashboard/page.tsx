@@ -16,7 +16,7 @@ export default function StudentDashboard() {
       const studentId = localStorage.getItem('studentId')
       if (!studentId) return
       try {
-        const res = await axios.get(`http://localhost:5000/api/student-dashboard/${studentId}`)
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/student-dashboard/${studentId}`)
         setDashboardData(res.data)
       } catch (error) {
         console.error("Error fetching dashboard data:", error)
@@ -60,7 +60,7 @@ export default function StudentDashboard() {
                   // Optional: log a minimum starting duration (can skip if not needed)
                   const durationMinutes = 1;
                   try {
-                    await fetch(`http://localhost:5000/api/activity/${studentId}/${course.courseId}`, {
+                    await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/activity/${studentId}/${course.courseId}`, {
                       method: 'PUT',
                       headers: {
                         'Content-Type': 'application/json',

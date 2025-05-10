@@ -100,7 +100,15 @@ export default function Dashboard() {
   // Fetch report ID when dataset changes
   // Fetch report ID and top features when dataset changes
     useEffect(() => {
-      axios.get<{ report_id: string, top_features: string[] }>(`http://localhost:5000/api/latest-report/${dataset}`)
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+      if (!backendUrl) {
+        console.error("Backend URL is not defined");
+        return;
+      }
+      axios.get<{ report_id: string; top_features: string[] }>(
+        `${backendUrl}/api/latest-report/${dataset}`
+      )
         .then((res) => {
           setReportId(res.data.report_id);
           // Directly set topFeatures as an array (no need to split the string)
@@ -120,7 +128,7 @@ export default function Dashboard() {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/dashboard/${dataset}`)
+    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dashboard/${dataset}`)
       .then((res) => {
         setDashboardData(res.data);
       })
@@ -132,7 +140,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchSolutionPathways = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/solution-pathways");
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/solution-pathways`);
         const data = await response.json();
         setSolutionPathways(data);
       } catch (error) {

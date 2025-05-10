@@ -71,7 +71,7 @@ export default function AdaptiveLearningPaths() {
   
       if (durationMinutes > 0) {
         try {
-          await fetch(`http://localhost:5000/api/activity/${studentId}/${courseId}`, {
+          await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/activity/${studentId}/${courseId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ durationMinutes }),
@@ -95,7 +95,7 @@ export default function AdaptiveLearningPaths() {
     
     const fetchLearningPaths = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/activity/${studentId}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/activity/${studentId}`);
         const rawData = await res.json();
   
         // Normalize field names
@@ -127,7 +127,7 @@ export default function AdaptiveLearningPaths() {
     const fetchRecommendedPaths = async () => {
       try {
         const studentId = localStorage.getItem('studentId');
-        const res = await fetch(`http://localhost:5000/api/recommendations/${studentId}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/recommendations/${studentId}`);
         const data = await res.json();
         setRecommendedPaths(data);
       } catch (error) {
@@ -141,7 +141,7 @@ export default function AdaptiveLearningPaths() {
   useEffect(() => {
     const fetchAllCourses = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/courses');
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/courses`);
         const data = await res.json();
         setAllCourses(data);
       } catch (error) {
@@ -176,7 +176,7 @@ export default function AdaptiveLearningPaths() {
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/activity', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/activity`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -278,7 +278,7 @@ export default function AdaptiveLearningPaths() {
                 // Optional: log a minimum starting duration (can skip if not needed)
                 const durationMinutes = 1;
                 try {
-                  await fetch(`http://localhost:5000/api/activity/${studentId}/${course.course_id}`, {
+                  await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/activity/${studentId}/${course.course_id}`, {
                     method: 'PUT',
                     headers: {
                       'Content-Type': 'application/json',

@@ -37,7 +37,9 @@ export default function CoursesPage() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/courses');
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+        const res = await axios.get(`${backendUrl}/api/courses`);
+
         const rawData = res.data;
   
         if (Array.isArray(rawData)) {

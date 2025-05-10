@@ -1,8 +1,13 @@
 from pymongo import MongoClient
 from datetime import datetime
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def save_html_report_to_mongo(report_html, dataset_name: str, metadata=None):
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient(os.getenv("MongoURI"))
     db = client["anvesha"]
     collection = db["reports"]
 

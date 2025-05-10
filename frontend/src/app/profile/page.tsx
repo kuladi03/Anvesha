@@ -99,9 +99,9 @@ export default function ProfilePage() {
 
     setStudentId(id);
 
-    axios
-      .get<CombinedResponse>(`http://localhost:5000/api/profile/${id}`)
-      .then(res => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get<CombinedResponse>(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/profile/${id}`);
         const { student, profile } = res.data;
         setForm({
           name: student?.name || '',
@@ -117,7 +117,7 @@ export default function ProfilePage() {
           course: profile?.course || '',
           previousQualification: profile?.previousQualification || '',
           motherQualification: profile?.motherQualification || '',
-          fatherQualification: profile?.fatherQualification|| '',
+          fatherQualification: profile?.fatherQualification || '',
           motherOccupation: profile?.motherOccupation || '',
           fatherOccupation: profile?.fatherOccupation || '',
           specialNeeds: profile?.specialNeeds || '',
@@ -125,15 +125,16 @@ export default function ProfilePage() {
           tuitionUpToDate: profile?.tuitionUpToDate || '',
           scholarshipHolder: profile?.scholarshipHolder || ''
         });
-        
-      })
-      .catch(() => {
+      } catch (error) {
         setError('Failed to load profile data.');
-      })
-      .finally(() => {
+      } finally {
         setLoadingAuth(false);
-      });
+      }
+    };
+
+    fetchProfile();
   }, []);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -145,7 +146,7 @@ export default function ProfilePage() {
     setError('');
 
     try {
-      await axios.put(`http://localhost:5000/api/profile/${studentId}`, {
+      await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/profile/${studentId}`, {
         name: form.name,
         email: form.email,
         gender: form.gender,

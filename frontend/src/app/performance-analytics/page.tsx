@@ -43,7 +43,7 @@ useEffect(() => {
     if (!studentId) return;
 
     // Fetch risk data from API
-    fetch(`http://localhost:5000/model_predict/${studentId}`)
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/model_predict/${studentId}`)
       .then((response) => response.json())
       .then((data) => {
         // Update state with risk label and score
@@ -62,7 +62,7 @@ useEffect(() => {
   useEffect(() => {
     const fetchData = async () => {
       const studentId = localStorage.getItem("studentId");
-      const response = await fetch(`http://localhost:5000/api/performance/${studentId}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/performance/${studentId}`);
       const data = await response.json();
 
       if (data.error) return;

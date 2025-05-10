@@ -12,14 +12,23 @@ import calendar
 import joblib
 import numpy as np
 from collections import defaultdict
+from dotenv import load_dotenv
+import os
+
+load_dotenv(dotenv_path="backend\.env")
+# Get FRONTEND_URL from environment variables
+frontend_url = os.getenv("FRONTEND_URL")
+backend_url = os.getenv("BACKEND_URL")
 
 app = Flask(__name__)
 # Exact and strict CORS setup
+# Set up CORS dynamically based on the environment
+if os.getenv("FLASK_ENV") == "production":
+    CORS(app, origins=[frontend_url], methods=["GET", "POST", "PUT", "OPTIONS"], allow_headers=["Content-Type"])
+else:
+    CORS(app, origins=["http://localhost:3000"], methods=["GET", "POST", "PUT", "OPTIONS"], allow_headers=["Content-Type"])
 
-CORS(app, origins=["http://localhost:3000"], methods=["GET", "POST", "PUT", "OPTIONS"], allow_headers=["Content-Type"])
-
-
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient(os.getenv("MongoURI"))
 db = client["anvesha"]
 
 model = joblib.load(r"backend\models\dropout_risk_model.pkl")
