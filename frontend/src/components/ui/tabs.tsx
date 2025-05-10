@@ -8,7 +8,7 @@ interface TabsProps {
   onValueChange: (value: string) => void;
   className?: string;
 }
-export const Tabs: FC<TabsProps> = ({ children, value , onValueChange, className }) => {
+export const Tabs: FC<TabsProps> = ({ children, className }) => {
   return <div className={`space-y-4 ${className || ""}`}>{children}</div>;
 };
 

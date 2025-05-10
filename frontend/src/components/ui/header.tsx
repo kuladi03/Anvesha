@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Sarathi from "../../../public/Sarathi.png"
-import { User, Book } from 'lucide-react';
+import { User } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {

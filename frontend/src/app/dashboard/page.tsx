@@ -14,10 +14,7 @@ import {
   TabsContent,
 } from "@/components/ui/tabs";
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer , PieChart, Pie, Cell , Treemap ,RadialBarChart,
-  RadialBar,
-  Scatter,
-  ScatterChart,
+  BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer , Cell ,
   CartesianGrid,
   LabelList
 } from "recharts";

@@ -5,7 +5,6 @@ import axios from 'axios'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import Progress from '@/components/ui/progress'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from 'recharts'
-import { GraduationCap, BookOpen } from 'lucide-react'
 import Header from '@/components/ui/header'
 
 export default function StudentDashboard() {

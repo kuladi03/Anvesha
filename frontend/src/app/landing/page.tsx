@@ -91,7 +91,7 @@ export default function LandingPage() {
           onClick={() => router.push("/login")}
           className="text-indigo-700 text-lg px-6 py-3 font-semibold"
         >
-          Let's Begin!
+          Let`&apos;`s Begin!
         </Button>
       </section>
 

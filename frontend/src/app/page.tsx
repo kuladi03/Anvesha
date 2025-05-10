@@ -1,6 +1,6 @@
 'use client';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, GraduationCap, BarChart2, Lightbulb, Users } from "lucide-react";
+import { BarChart2, Lightbulb, Users } from "lucide-react";
 import Link from "next/link";
 
 export default function LandingPage() {
@@ -84,7 +84,7 @@ export default function LandingPage() {
                 <Lightbulb className="text-[#6E59A5] h-10 w-10 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-[#6E59A5]">Personalized Interventions</h3>
                 <p className="mt-2 text-gray-700">
-                  Generate custom support strategies tailored to each student's unique needs and challenges.
+                  Generate custom support strategies tailored to each student`&apos;`s unique needs and challenges.
                 </p>
               </div>
 

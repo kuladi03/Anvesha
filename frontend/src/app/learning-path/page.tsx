@@ -19,7 +19,6 @@ import {
 } from '@/components/ui/tabs';
 import { Users } from 'lucide-react';
 import Header from '@/components/ui/header';
-import Link from 'next/link';
 import { CourseSearch } from '@/components/courses/CourseSearch';
 
 interface Course {

@@ -2,20 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Mail, MapPin, GraduationCap, User } from 'lucide-react';
 import Header from '@/components/ui/header';
-import Link from 'next/link';
 
 interface Student {
   name: string;
@@ -80,14 +69,6 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [loadingAuth, setLoadingAuth] = useState(true);
   const router = useRouter();
-
-  const ProfileField = ({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) => (
-    <div className="flex items-center gap-2">
-      {icon}
-      <span><strong>{label}:</strong> {value}</span>
-    </div>
-  );
-  
 
   useEffect(() => {
     const id = localStorage.getItem('studentId');
@@ -285,19 +266,19 @@ export default function ProfilePage() {
                 <h4 className="font-semibold text-gray-700 border-b pb-2">Family Background</h4>
                 <div className="space-y-4">
                   <div>
-                    <p className="text-sm text-gray-500">Mother's Education</p>
+                    <p className="text-sm text-gray-500">Mother`&apos;`s Education</p>
                     <p className="font-medium text-gray-800">{form.motherQualification || '-'}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Father's Education</p>
+                    <p className="text-sm text-gray-500">Father`&apos;`s Education</p>
                     <p className="font-medium text-gray-800">{form.fatherQualification || '-'}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Mother's Occupation</p>
+                    <p className="text-sm text-gray-500">Mother`&apos;`s Occupation</p>
                     <p className="font-medium text-gray-800">{form.motherOccupation || '-'}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Father's Occupation</p>
+                    <p className="text-sm text-gray-500">Father`&apos;`s Occupation</p>
                     <p className="font-medium text-gray-800">{form.fatherOccupation || '-'}</p>
                   </div>
                 </div>
