@@ -183,7 +183,7 @@ console.log("Top Features: ", topFeatures);
             {/* Report Button */}
             {reportId && !isLoading && (
               <button
-                onClick={() => window.open(`http://localhost:5000/report/${reportId}`, "_blank")}
+                onClick={() => window.open(`${process.env.NEXT_PUBLIC_BACKEND_URL}/report/${reportId}`, "_blank")}
                 className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
               >
                 View ML Report
