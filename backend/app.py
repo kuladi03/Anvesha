@@ -23,10 +23,10 @@ backend_url = os.getenv("BACKEND_URL")
 app = Flask(__name__)
 # Exact and strict CORS setup
 # Set up CORS dynamically based on the environment
-if os.getenv("FLASK_ENV") == "production":
-    CORS(app, origins=[frontend_url], methods=["GET", "POST", "PUT", "OPTIONS"], allow_headers=["Content-Type"])
-else:
-    CORS(app, origins=["http://localhost:3000"], methods=["GET", "POST", "PUT", "OPTIONS"], allow_headers=["Content-Type"])
+# if os.getenv("FLASK_ENV") == "production":
+CORS(app, origins=[frontend_url], methods=["GET", "POST", "PUT", "OPTIONS"], allow_headers=["Content-Type"])
+# else:
+#     CORS(app, origins=["http://localhost:3000"], methods=["GET", "POST", "PUT", "OPTIONS"], allow_headers=["Content-Type"])
 
 client = MongoClient(os.getenv("MongoURI"))
 db = client["anvesha"]
