@@ -199,12 +199,12 @@ export default function AdaptiveLearningPaths() {
       className="relative bg-white shadow-lg rounded-lg transition duration-200 hover:shadow-xl"
     >
       {course.origin && (
-        <div className="absolute top-2 right-2 bg-purple-600 text-white text-xs px-2 py-1 rounded-md shadow-md">
+        <div className="absolute top-2 right-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-md shadow-md">
           {course.origin}
         </div>
       )}
       <CardHeader>
-        <CardTitle className="text-xl font-semibold text-purple-800 leading-snug">
+        <CardTitle className="text-xl font-semibold text-blue-800 leading-snug">
           {course.title}
         </CardTitle>
         {course.discipline && (
@@ -258,14 +258,14 @@ export default function AdaptiveLearningPaths() {
         <div className="pt-3 flex gap-2 justify-end">
           {course.nptel_url && (
             <a href={course.nptel_url} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" className="text-purple-700 border-purple-500 hover:bg-purple-100">
+              <Button variant="outline" className="text-blue-700 border-blue-500 hover:bg-blue-100">
                 View Course
               </Button>
             </a>
           )}
             <Button
               variant="default"
-              className="bg-purple-600 hover:bg-purple-700"
+              className="bg-blue-600 hover:bg-blue-700 text-white"
               onClick={async () => {
                 const studentId = localStorage.getItem('studentId');
                 const now = Date.now();
