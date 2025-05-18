@@ -290,7 +290,17 @@ export default function PerformanceAnalytics() {
 										{overallRisk.label}
 									</span>
 								</div>
-								<Progress value={overallRisk.value} className="h-2" />
+								{/* <Progress value={overallRisk.value} className="h-2" /> */}
+								<Progress
+									value={overallRisk.value}
+									className={`h-2 ${
+										overallRisk.label.toLowerCase() === "high"
+											? "bg-red-300"
+											: overallRisk.label.toLowerCase() === "medium"
+											? "bg-yellow-300"
+											: "bg-green-300"
+									}`}
+								/>
 							</div>
 						</div>
 					</CardContent>
