@@ -48,8 +48,8 @@ export const TabsTrigger: FC<TabsTriggerProps> = ({
       className={`px-4 py-2 text-sm font-medium transition duration-150 rounded-t-md
         ${
           isSelected
-            ? "text-purple-600 bg-white border-b-2 border-purple-600"
-            : "text-gray-600 hover:text-purple-600"
+            ? "text-blue-600 bg-white border-b-2 border-blue-600"
+            : "text-gray-600 hover:text-blue-600"
         }
         ${className || ""}
       `}

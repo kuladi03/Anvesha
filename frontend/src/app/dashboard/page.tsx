@@ -159,8 +159,11 @@ console.log("Top Features: ", topFeatures);
           <img src={Anvesha.src} alt="Logo" className="h-10" />
         </Link>
         <div className="flex items-center gap-6">
-          <button onClick={goToLanding} className="text-gray-900 hover:text-indigo-500">
-            Saarthi ↗
+          <button onClick={goToLanding} className="text-gray-900 hover:text-indigo-500 border border-gray-300 rounded px-4 py-2 transition duration-200">
+            Sarathi
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M12.293 3.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 9H7a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
           </button>
         </div>
       </header>
@@ -271,13 +274,18 @@ console.log("Top Features: ", topFeatures);
           <div className="mt-10">
   <h2 className="text-xl font-semibold text-black mb-4">Demographic Insights</h2>
   <Tabs value={activeTab} onValueChange={setActiveTab}>
-    <TabsList>
+    <TabsList className="flex gap-2 mb-4">
       {demographicTabs.map((tab) => (
         <TabsTrigger
           key={tab.id}
           value={tab.id}
           isSelected={activeTab === tab.id}
           onClick={() => setActiveTab(tab.id)}
+          className={`px-4 py-2 rounded transition-colors duration-200 ${
+            activeTab === tab.id
+              ? 'bg-indigo-600 text-black shadow'
+              : 'bg-white text-gray-800 border border-gray-300 hover:bg-indigo-50'
+          }`}
         >
           {tab.label}
         </TabsTrigger>
@@ -291,36 +299,40 @@ console.log("Top Features: ", topFeatures);
       { id: "age", data: dashboardData?.age_vs_dropout },
     ].map(({ id, data }) => (
       <TabsContent key={id} isActive={activeTab === id}>
-        <ResponsiveContainer width="100%" height={350}>
-          <BarChart
-            data={formatData(data, id)}
-            margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-            <XAxis
-              dataKey="category"
-              axisLine={false}
-              tickLine={false}
-              tick={{ fontSize: 12 }}
-            />
-            <YAxis
-              axisLine={false}
-              tickLine={false}
-              tick={{ fontSize: 12 }}
-            />
-            <Tooltip
-              cursor={{ fill: 'rgba(0, 0, 0, 0.05)' }}
-              contentStyle={{
-                borderRadius: '8px',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-              }}
-            />
-            <Legend />
-            <Bar dataKey="Dropout" fill="#ef4444" name="Dropouts" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="Enrolled" fill="#3b82f6" name="Enrolled" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="Graduate" fill="#10b981" name="Graduates" radius={[4, 4, 0, 0]} />
-          </BarChart>
-        </ResponsiveContainer>
+        {!data ? (
+          <div className="text-center text-black-200 py-12">Loading data...</div>
+        ) : (
+          <ResponsiveContainer width="100%" height={350}>
+            <BarChart
+              data={formatData(data, id)}
+              margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
+              <XAxis
+                dataKey="category"
+                axisLine={false}
+                tickLine={false}
+                tick={{ fontSize: 12 }}
+              />
+              <YAxis
+                axisLine={false}
+                tickLine={false}
+                tick={{ fontSize: 12 }}
+              />
+              <Tooltip
+                cursor={{ fill: 'rgba(0, 0, 0, 0.05)' }}
+                contentStyle={{
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                }}
+              />
+              <Legend />
+              <Bar dataKey="Dropout" fill="#ef4444" name="Dropouts" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Enrolled" fill="#3b82f6" name="Enrolled" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Graduate" fill="#10b981" name="Graduates" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        )}
       </TabsContent>
     ))}
   </Tabs>
@@ -329,44 +341,68 @@ console.log("Top Features: ", topFeatures);
            <div className="max-w-4xl mx-auto my-8 px-4">
   <h1 className="text-2xl font-bold text-center text-black mb-6">Solution Pathways</h1>
   <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
-    <TabsList className="flex justify-center gap-4 mb-6">
+    <TabsList className="flex flex-wrap justify-center gap-3 mb-6">
       {categories.map((category) => (
         <TabsTrigger
           key={category}
           value={category}
           isSelected={category === selectedCategory}
           onClick={() => setSelectedCategory(category)}
-          className={`px-4 py-2 rounded-md border transition-colors duration-200 ${
+          className={`px-4 py-2 border transition-colors duration-200 ${
             category === selectedCategory
-              ? 'bg-purple-600 text-white'
-              : 'bg-white text-black hover:bg-purple-100'
+              ? 'bg-indigo-600 text-black border-indigo-600 shadow'
+              : 'bg-white text-gray-800 border-gray-300 hover:bg-indigo-50'
           }`}
         >
-          {category.toUpperCase()}
+          {category}
         </TabsTrigger>
       ))}
     </TabsList>
     {categories.map((category) => (
       <TabsContent key={category} isActive={category === selectedCategory}>
-        <ul className="space-y-4">
-          {filteredData
-            .filter((item) => item.category === category)
-            .map((item) => (
-              <li key={item._id} className="border border-gray-200 p-5 rounded-lg shadow-sm bg-white">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-800 mb-1">{item.description}</p>
-                <p className="text-sm text-gray-700 mb-2">{item.impact}</p>
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-purple-600 hover:underline font-medium"
+        {filteredData.filter((item) => item.category === category).length === 0 ? (
+          <div className="text-center text-gray-500 py-8">No solution pathways available for this category.</div>
+        ) : (
+          <ul className="space-y-5">
+            {filteredData
+              .filter((item) => item.category === category)
+              .map((item) => (
+                <li
+                  key={item._id}
+                  className="border border-gray-200 p-6 rounded-lg shadow bg-white hover:shadow-md transition"
                 >
-                  More Info
-                </a>
-              </li>
-            ))}
-        </ul>
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+                    <div>
+                      <h3 className="text-lg font-bold text-indigo-700 mb-1">{item.title}</h3>
+                      <p className="text-gray-800 mb-1">{item.description}</p>
+                      <p className="text-sm text-gray-600 mb-2">
+                        <span className="font-medium">Impact:</span> {item.impact}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        <span className="font-medium">Target Group:</span> {item.targetGroup}
+                        {item.implementingAgency && (
+                          <>
+                            {' | '}
+                            <span className="font-medium">Agency:</span> {item.implementingAgency}
+                          </>
+                        )}
+                      </p>
+                    </div>
+                    <div className="mt-2 md:mt-0 flex-shrink-0">
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 font-medium border border-indigo-300 transition"
+                      >
+                        More Info
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              ))}
+          </ul>
+        )}
       </TabsContent>
     ))}
   </Tabs>

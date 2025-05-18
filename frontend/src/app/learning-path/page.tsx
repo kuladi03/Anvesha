@@ -196,106 +196,117 @@ export default function AdaptiveLearningPaths() {
   const renderCourseCard = (course: Course, isLearningPath = false) => (
     <Card
       key={course.course_id || course.title}
-      className="relative bg-white shadow-lg rounded-lg transition duration-200 hover:shadow-xl"
+      className="relative bg-white shadow-md rounded-xl transition-transform duration-200 hover:scale-[1.02] hover:shadow-2xl border border-gray-100"
     >
       {course.origin && (
-        <div className="absolute top-2 right-2 bg-purple-600 text-white text-xs px-2 py-1 rounded-md shadow-md">
+        <div className="absolute top-3 right-3 bg-blue-700 text-white text-xs px-3 py-1 rounded-full shadow z-10 font-semibold tracking-wide">
           {course.origin}
         </div>
       )}
       <CardHeader>
-        <CardTitle className="text-xl font-semibold text-purple-800 leading-snug">
+        <CardTitle className="text-lg font-bold text-gray-900 mb-1 truncate">
           {course.title}
         </CardTitle>
         {course.discipline && (
-          <CardDescription className="text-sm text-gray-500 mt-1">
+          <CardDescription className="text-xs text-gray-500 mt-0.5">
             {course.discipline}
           </CardDescription>
         )}
       </CardHeader>
 
-      <CardContent className="space-y-2 text-sm text-gray-700">
+      <CardContent className="space-y-1.5 text-sm text-gray-700">
         {course.instructor && (
           <div>
-            <span className="font-medium">Instructor:</span> {course.instructor}
+            <span className="font-semibold text-gray-800">Instructor:</span> {course.instructor}
           </div>
         )}
         {course.institute && (
           <div>
-            <span className="font-medium">Institute:</span> {course.institute}
+            <span className="font-semibold text-gray-800">Institute:</span> {course.institute}
           </div>
         )}
         {course.duration && (
           <div>
-            <span className="font-medium">Duration:</span> {course.duration}
+            <span className="font-semibold text-gray-800">Duration:</span> {course.duration}
           </div>
         )}
         {course.level && (
           <div>
-            <span className="font-medium">Level:</span> {course.level}
+            <span className="font-semibold text-gray-800">Level:</span> {course.level}
           </div>
         )}
         {course.nptel_domain && (
           <div>
-            <span className="font-medium">Domain:</span> {course.nptel_domain}
+            <span className="font-semibold text-gray-800">Domain:</span> {course.nptel_domain}
           </div>
         )}
         {isLearningPath && (
-          <>
+          <div className="flex flex-col gap-0.5">
             <div>
-              <span className="font-medium">Time Spent:</span>{' '}
-              {course.timeSpent || 0} mins
+              <span className="font-semibold text-gray-800">Time Spent:</span>{' '}
+              <span className="text-gray-600">{course.timeSpent || 0} mins</span>
             </div>
             <div>
-              <span className="font-medium">Last Accessed:</span>{' '}
-              {course.lastAccessed
-                ? new Date(course.lastAccessed).toLocaleDateString()
-                : 'N/A'}
+              <span className="font-semibold text-gray-800">Last Accessed:</span>{' '}
+              <span className="text-gray-600">
+                {course.lastAccessed
+                  ? new Date(course.lastAccessed).toLocaleDateString()
+                  : 'N/A'}
+              </span>
             </div>
-          </>
+          </div>
         )}
 
-        <div className="pt-3 flex gap-2 justify-end">
+        <div className="pt-4 flex flex-wrap gap-2 justify-end">
           {course.nptel_url && (
             <a href={course.nptel_url} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" className="text-purple-700 border-purple-500 hover:bg-purple-100">
-                View Course
+              <Button
+                variant="outline"
+                className="text-blue-700 border-blue-500 hover:bg-blue-50 font-medium"
+              >
+                View Details
               </Button>
             </a>
           )}
-            <Button
-              variant="default"
-              className="bg-purple-600 hover:bg-purple-700"
-              onClick={async () => {
-                const studentId = localStorage.getItem('studentId');
-                const now = Date.now();
+          <Button
+            variant="default"
+            className="bg-blue-700 hover:bg-blue-800 font-semibold shadow"
+            onClick={async (e) => {
+              e.preventDefault();
+              const studentId = localStorage.getItem('studentId');
+              const now = Date.now();
 
-                // Track which course is currently being opened
-                localStorage.setItem(`startTime-${course.course_id}`, now.toString());
-                localStorage.setItem('activeCourse', course.course_id);
+              localStorage.setItem(`startTime-${course.course_id}`, now.toString());
+              localStorage.setItem('activeCourse', course.course_id);
 
-                // Optional: log a minimum starting duration (can skip if not needed)
-                const durationMinutes = 1;
-                try {
-                  await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/activity/${studentId}/${course.course_id}`, {
-                    method: 'PUT',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ durationMinutes }),
-                  });
-                } catch (error) {
-                  console.error('Failed to log initial activity:', error);
-                }
+              const durationMinutes = 1;
+              try {
+                await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/activity/${studentId}/${course.course_id}`, {
+                  method: 'PUT',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ durationMinutes }),
+                });
+              } catch (error) {
+                console.error('Failed to log initial activity:', error);
+              }
 
-                window.open(course.join_link, '_blank');
-              }}
-            >
-              {isLearningPath ? 'Continue' : 'Join Now'}
-            </Button>
+              window.open(course.join_link, '_blank');
+            }}
+          >
+            {isLearningPath ? 'Continue Learning' : 'Join Course'}
+          </Button>
 
           {!isLearningPath && (
-            <Button variant="outline" onClick={() => handleAddToPath(course)}>
+            <Button
+              variant="outline"
+              className="border-gray-300 hover:bg-gray-50"
+              onClick={(e) => {
+                e.preventDefault();
+                handleAddToPath(course);
+              }}
+            >
               Add to My Path
             </Button>
           )}
@@ -305,9 +316,9 @@ export default function AdaptiveLearningPaths() {
   );
 
   return (
-    <div>
+    <div className="bg-gray-50 min-h-screen">
       <Header />
-      <div className="container mx-auto px-10 py-30 min-h-screen bg-gray-100 text-black">
+      <div className="px-4 md:px-10 py-30 max-w-7xl mx-auto text-black">
         <h1 className="text-3xl font-bold mb-6">Adaptive Learning Paths</h1>
   
         <Tabs value={currentTab} onValueChange={setCurrentTab}>
@@ -332,14 +343,6 @@ export default function AdaptiveLearningPaths() {
       onClick={setCurrentTab}
     >
       All Courses
-    </TabsTrigger>
-
-    <TabsTrigger
-      value="study-rooms"
-      isSelected={currentTab === "study-rooms"}
-      onClick={setCurrentTab}
-    >
-      Study Rooms
     </TabsTrigger>
   </TabsList>
 
@@ -440,31 +443,6 @@ export default function AdaptiveLearningPaths() {
         </>
       )}
     </TabsContent>
-
-
-  <TabsContent isActive={currentTab === "study-rooms"}>
-    <Card>
-      <CardHeader>
-        <CardTitle>Collaborative Study Rooms</CardTitle>
-        <CardDescription>Join or create a virtual study room</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ul className="space-y-4">
-          <li className="flex items-center justify-between">
-            <div>
-              <h3 className="font-medium">Python Coding Challenge</h3>
-              <p className="text-sm text-muted-foreground">7 participants | Topic: Algorithms</p>
-            </div>
-            <Button>Join Room</Button>
-          </li>
-        </ul>
-        <Button className="w-full mt-4" variant="outline">
-          <Users className="mr-2 h-4 w-4" />
-          Create New Study Room
-        </Button>
-      </CardContent>
-    </Card>
-  </TabsContent>
 </Tabs>
 
       </div>

@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Progress from "@/components/ui/progress";
 import {
-  BarChart, LineChart, PieChart,
-  Bar, Line, Pie,
+  BarChart, LineChart,
+  Bar, Line, 
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from "recharts";
 import Header from "@/components/ui/header";
@@ -33,7 +33,7 @@ interface EngagementMetric {
 
 export default function PerformanceAnalytics() {
   const [courseProgressData, setCourseProgressData] = useState<CourseProgress[]>([]);
-  const [timeSpentData, setTimeSpentData] = useState<CourseProgress[]>([]);
+  const [timeSpentData,setTimeSpentData] = useState<CourseProgress[]>([]);
   const [dailyProgressData, setDailyProgressData] = useState<DailyProgress[]>([]);
   const [overallRisk, setOverallRisk] = useState<Risk>({ value: 0, label: "Loading..." });
   const [engagementMetrics, setEngagementMetrics] = useState<EngagementMetric[]>([]);
@@ -127,128 +127,133 @@ useEffect(() => {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen bg-white">
       <Header />
-      <div className="container mx-auto px-10 py-30 min-h-screen bg-gray-100 text-black">
-        <h1 className="text-3xl font-bold mb-6">Performance Analytics</h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Course Time Spent</CardTitle>
-              <CardDescription>Total minutes spent on each course</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={courseProgressData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis 
-                  dataKey="courseTitle" 
-                  tick={{ fontSize: 10 }} 
-                  interval={0} 
-                  angle={-45} 
-                  textAnchor="end" 
-                  />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="totalMinutes" fill="#3B82F6" name="Minutes" />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Time Distribution</CardTitle>
-              <CardDescription>Proportional time spent per course</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie 
-                  dataKey="totalMinutes" 
-                  data={timeSpentData} 
-                  fill="#3B82F6" 
-                  nameKey="courseTitle" 
-                  label={({ name }) => name} // Simple label rendering
-                  />
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </div>
-
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>Daily Study Trends</CardTitle>
-            <CardDescription>Study activity over time</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={dailyProgressData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="duration" stroke="#3B82F6" name="Minutes" />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
+      <div className="container px-10 py-30 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <Card className="shadow-xl border-0 bg-white">
+        <CardHeader>
+          <CardTitle className="text-lg text-gray-800">Course Time Spent</CardTitle>
+          <CardDescription className="text-gray-500">Total minutes spent on each course</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={260}>
+          <BarChart data={courseProgressData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <XAxis 
+            dataKey="courseTitle"
+            tick={{ fontSize: 12, fill: "#374151" }}
+            interval={0}
+            angle={-30}
+            textAnchor="end"
+            />
+            <YAxis tick={{ fill: "#374151" }} />
+            <Tooltip contentStyle={{ background: "#f3f4f6", borderRadius: 8, color: "#374151" }} />
+            <Legend />
+            <Bar dataKey="totalMinutes" fill="#6366f1" name="Minutes" radius={[8, 8, 0, 0]} />
+          </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
         </Card>
 
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>Dropout Risk Assessment</CardTitle>
-            <CardDescription>Calculated from performance and activity</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between mb-1">
-                  <span className="text-sm font-medium">Overall Risk</span>
-                  <span className="text-sm font-medium">{overallRisk.label}</span>
-                </div>
-                <Progress value={overallRisk.value} className="h-2" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Attendance (Based on Activity)</CardTitle>
-            <CardDescription>Presence tracked from daily logs</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {engagementMetrics.map((metric, index) => (
-                <div key={index}>
-                  <div className="flex justify-between mb-1">
-                    <span className="text-sm font-medium">{metric.metric}</span>
-                    <span className="text-sm font-medium">{metric.value} / {metric.goal}</span>
-                  </div>
-                  <Progress value={(metric.value / metric.goal) * 100} className="h-2" />
-                </div>
-              ))}
-            </div>
-          </CardContent>
+        <Card className="shadow-xl border-0 bg-white">
+        <CardHeader>
+          <CardTitle className="text-lg text-gray-800">Daily Study Trends</CardTitle>
+          <CardDescription className="text-gray-500">Study activity over time</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={260}>
+          <LineChart data={dailyProgressData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <XAxis dataKey="date" tick={{ fill: "#374151" }} />
+            <YAxis tick={{ fill: "#374151" }} />
+            <Tooltip contentStyle={{ background: "#f3f4f6", borderRadius: 8, color: "#374151" }} />
+            <Legend />
+            <Line
+            type="monotone"
+            dataKey="duration"
+            stroke="#6366f1"
+            strokeWidth={3}
+            dot={{ r: 5, fill: "#818cf8" }}
+            activeDot={{ r: 8, fill: "#6366f1" }}
+            name="Minutes"
+            />
+          </LineChart>
+          </ResponsiveContainer>
+        </CardContent>
         </Card>
       </div>
 
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t bg-white">
-        <p className="text-xs text-gray-500">© 2024 Anvesha.</p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-xs text-blue-600 hover:underline" href="#">
-            Terms of Service
-          </Link>
-          <Link className="text-xs text-blue-600 hover:underline" href="#">
-            Privacy
-          </Link>
-        </nav>
-      </footer>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <Card className="shadow-xl border-0 bg-white">
+        <CardHeader>
+          <CardTitle className="text-lg text-gray-800">Dropout Risk Assessment</CardTitle>
+          <CardDescription className="text-gray-500">Calculated from performance and activity</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+          <div>
+            <div className="flex justify-between items-center mb-2">
+            <span className="text-sm font-medium text-gray-700">Overall Risk</span>
+            <span
+              className={`text-sm font-bold px-2 py-1 rounded ${
+              overallRisk.label === "high"
+                ? "bg-red-100 text-red-700"
+                : overallRisk.label === "medium"
+                ? "bg-yellow-100 text-yellow-700"
+                : "bg-green-100 text-green-700"
+              }`}
+            >
+              {overallRisk.label}
+            </span>
+            </div>
+            <Progress
+            value={overallRisk.value}
+            className={`h-3 rounded-full ${
+              overallRisk.label === "high"
+              ? "bg-red-200"
+              : overallRisk.label === "medium"
+              ? "bg-yellow-200"
+              : "bg-green-200"
+            }`}
+            />
+            <div className="text-xs text-gray-400 mt-1 text-right">
+            {overallRisk.value.toFixed(1)}%
+            </div>
+          </div>
+          </div>
+        </CardContent>
+        </Card>
+
+        <Card className="shadow-xl border-0 bg-white">
+        <CardHeader>
+          <CardTitle className="text-lg text-gray-800">Attendance (Based on Activity)</CardTitle>
+          <CardDescription className="text-gray-500">Presence tracked from daily logs</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+          {engagementMetrics.map((metric, index) => (
+            <div key={index}>
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm font-medium text-gray-700">{metric.metric}</span>
+              <span className="text-sm font-semibold text-gray-800">
+              {metric.value} / {metric.goal}
+              </span>
+            </div>
+            <Progress
+              value={(metric.value / metric.goal) * 100}
+              className="h-3 rounded-full bg-indigo-200"
+            />
+            <div className="text-xs text-gray-400 mt-1 text-right">
+              {((metric.value / metric.goal) * 100).toFixed(1)}%
+            </div>
+            </div>
+          ))}
+          </div>
+        </CardContent>
+        </Card>
+      </div>
+      </div>
     </div>
   );
 }

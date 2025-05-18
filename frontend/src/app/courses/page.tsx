@@ -76,7 +76,7 @@ export default function CoursesPage() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-4xl font-bold mb-8 text-center text-purple-700">
+      <h1 className="text-4xl font-bold mb-8 text-center text-blue-700">
         Explore NPTEL Courses
       </h1>
   
@@ -100,12 +100,12 @@ export default function CoursesPage() {
             >
               {/* Origin badge */}
               {course.origin && (
-                <div className="absolute top-2 right-2 bg-purple-600 text-white text-xs px-2 py-1 rounded-md shadow-md">
+                <div className="absolute top-2 right-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-md shadow-md">
                   {course.origin}
                 </div>
               )}
               <CardHeader>
-                <CardTitle className="text-xl font-semibold text-purple-800 leading-snug">
+                <CardTitle className="text-xl font-semibold text-black-800 leading-snug">
                   {course.title}
                 </CardTitle>
                 <CardDescription className="text-sm text-gray-500 mt-1">
@@ -153,7 +153,7 @@ export default function CoursesPage() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Button variant="outline" className="text-purple-700 border-purple-500 hover:bg-purple-100">
+        <Button variant="outline" className="text-blue-700 border-blue-500 hover:bg-blue-100">
           Go to Course
         </Button>
       </a>
@@ -163,7 +163,7 @@ export default function CoursesPage() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Button variant="primary" className="bg-purple-600 hover:bg-purple-700">
+        <Button variant="primary" className="bg-blue-600 hover:bg-blue-700">
           Join Now
         </Button>
       </a>
