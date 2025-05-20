@@ -10,7 +10,7 @@ export default function Header() {
   const navLinks = [
     { href: '/learning-path', label: 'Learning Path' },
     { href: '/performance-analytics', label: 'Performance Analytics' },
-    { href: '/dashboard', label: 'Anvesha' },
+    { href: 'https://cohort-insight-room.lovable.app/', label: 'Study Rooms' },
   ];
 
   return (
