@@ -187,9 +187,9 @@ export default function ProfilePage() {
                 {form.standard} | {form.school}
               </p>
               <div className="flex gap-2 flex-wrap">
-                <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm">
+                {/* <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm">
                   {form.caste || 'Caste'}
-                </span>
+                </span> */}
                 <span className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm">
                   {form.age || 'Age'} years
                 </span>

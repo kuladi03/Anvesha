@@ -217,7 +217,7 @@ export default function StudentDashboard() {
             <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
               <li><strong>Gender:</strong> {dashboardData.studentInfo.gender}</li>
               <li><strong>Age:</strong> {dashboardData.studentInfo.age}</li>
-              <li><strong>Caste:</strong> {dashboardData.studentInfo.caste}</li>
+              {/* <li><strong>Caste:</strong> {dashboardData.studentInfo.caste}</li> */}
               <li><strong>Area:</strong> {dashboardData.studentInfo.area}</li>
               <li><strong>State:</strong> {dashboardData.studentInfo.state}</li>
               <li><strong>Email:</strong> {dashboardData.email}</li>
